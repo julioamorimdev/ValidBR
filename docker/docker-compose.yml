@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  node:
+    image: node:20
+    working_dir: /app/nodejs
+    volumes:
+      - ../nodejs:/app/nodejs
+    command: sh -c "npm install && npm run build && npm test"
+  python:
+    image: python:3.11
+    working_dir: /app/python
+    volumes:
+      - ../python:/app/python
+    command: sh -c "pip install .[dev] && pytest"
+  php:
+    image: php:8.2-cli
+    working_dir: /app/php
+    volumes:
+      - ../php:/app/php
+    command: sh -c "composer install && vendor/bin/phpunit"
