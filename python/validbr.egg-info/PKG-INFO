@@ -4,7 +4,7 @@ Version: 1.0.0
 Summary: A comprehensive Brazilian validation library for Python
 Home-page: https://github.com/validbr/validbr
 Author: ValidBR Team
-Author-email: support@validbr.com
+Author-email: julio@grupojpc.com.br
 License: UNKNOWN
 Project-URL: Bug Reports, https://github.com/validbr/validbr/issues
 Project-URL: Source, https://github.com/validbr/validbr
@@ -336,7 +336,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- 📧 Email: support@validbr.com
+- 📧 Email: julio@grupojpc.com.br
 - 🐛 Issues: [GitHub Issues](https://github.com/validbr/validbr/issues)
 - 📖 Documentation: [https://docs.validbr.com](https://docs.validbr.com)
 - 💬 Discussions: [GitHub Discussions](https://github.com/validbr/validbr/discussions)

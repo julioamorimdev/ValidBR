@@ -10,7 +10,7 @@ setup(
     name="validbr",
     version="1.0.0",
     author="ValidBR Team",
-    author_email="support@validbr.com",
+    author_email="julio@grupojpc.com.br",
     description="A comprehensive Brazilian validation library for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",

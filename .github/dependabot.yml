@@ -1,0 +1,98 @@
+# Dependabot configuration for ValidBR
+
+version: 2
+updates:
+  # Node.js dependencies
+  - package-ecosystem: "npm"
+    directory: "/nodejs"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "validbr/team"
+    assignees:
+      - "validbr/team"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "nodejs"
+
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/python"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "validbr/team"
+    assignees:
+      - "validbr/team"
+    commit-message:
+      prefix: "pip"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "python"
+
+  # PHP dependencies
+  - package-ecosystem: "composer"
+    directory: "/php"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "validbr/team"
+    assignees:
+      - "validbr/team"
+    commit-message:
+      prefix: "composer"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "php"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "validbr/team"
+    assignees:
+      - "validbr/team"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/docker"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "validbr/team"
+    assignees:
+      - "validbr/team"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "docker" 

@@ -1,0 +1,144 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: nodejs/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl
+
+      - name: Install Node.js dependencies
+        run: |
+          cd nodejs
+          npm ci
+
+      - name: Install Python dependencies
+        run: |
+          cd python
+          pip install -e .
+          pip install build twine
+
+      - name: Install PHP dependencies
+        run: |
+          cd php
+          composer install --prefer-dist --no-progress
+
+      - name: Run tests
+        run: |
+          cd nodejs && npm test
+          cd ../python && python -m pytest
+          cd ../php && composer test
+
+      - name: Build Node.js package
+        run: |
+          cd nodejs
+          npm run build
+
+      - name: Build Python package
+        run: |
+          cd python
+          python -m build
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## What's Changed
+            
+            This release includes:
+            - Bug fixes and improvements
+            - Enhanced documentation
+            - Performance optimizations
+            
+            ## Installation
+            
+            ### Node.js
+            ```bash
+            npm install validbr@${{ github.ref_name }}
+            ```
+            
+            ### Python
+            ```bash
+            pip install validbr==${{ github.ref_name }}
+            ```
+            
+            ### PHP
+            ```bash
+            composer require validbr/validbr:${{ github.ref_name }}
+            ```
+            
+            ## Documentation
+            
+            - [API Reference](https://docs.validbr.com)
+            - [Interactive Demo](https://validbr.com/demo)
+            - [GitHub Repository](https://github.com/validbr/validbr)
+            
+            ## Support
+            
+            - 📧 Email: support@validbr.com
+            - 💬 Discussions: https://github.com/validbr/validbr/discussions
+            - 🐛 Issues: https://github.com/validbr/validbr/issues
+          draft: false
+          prerelease: false
+
+      - name: Publish to NPM
+        run: |
+          cd nodejs
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to PyPI
+        run: |
+          cd python
+          twine upload dist/* --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
+
+      - name: Update version files
+        run: |
+          # Update version in package.json files
+          cd nodejs
+          npm version ${{ github.ref_name }} --no-git-tag-version
+          
+          cd ../python
+          # Update version in setup.py
+          sed -i "s/version=\"[^\"]*\"/version=\"${{ github.ref_name }}\"/" setup.py
+          
+          cd ../php
+          # Update version in composer.json
+          sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"${{ github.ref_name }}\"/" composer.json
+
+      - name: Commit version updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update version to ${{ github.ref_name }}"
+          git push 

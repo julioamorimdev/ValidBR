@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📧 Email Support
+    url: mailto:julio@grupojpc.com.br
+    about: Get help via email for private matters
+  - name: 💬 GitHub Discussions
+    url: https://github.com/validbr/validbr/discussions
+    about: Ask questions and discuss ValidBR with the community
+  - name: 📖 Documentation
+    url: https://docs.validbr.com
+    about: Read the official ValidBR documentation
+  - name: 📱 Discord Community
+    url: https://discord.gg/validbr
+    about: Join our Discord server for real-time chat 
