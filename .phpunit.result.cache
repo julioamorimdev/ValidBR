@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"ValidBRTest::testCPF":0.004,"ValidBRTest::testCNPJ":0.001,"ValidBRTest::testPhone":0.001,"ValidBRTest::testEmail":0.001,"ValidBRTest::testName":0.001,"ValidBRTest::testBirthDate":0.001,"ValidBRTest::testCEP":0,"ValidBRTest::testRG":0,"ValidBRTest::testIE":0,"ValidBRTest::testUtils":0}}

@@ -31,7 +31,7 @@
       "name": "validbr/validbr",
       "registry": "https://packagist.org/",
       "requiresAuth": false,
-      "requiresManualSetup": true,
+      "requiresManualSetup": false,
       "commands": {
         "test": "composer test",
         "validate": "composer validate"

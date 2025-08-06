@@ -1,2 +1,18 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Composer - include only PHP files
+/php/src/ export-ignore
+/php/tests/ export-ignore
+/php/vendor/ export-ignore
+/php/composer.lock export-ignore
+/php/composer.json export-ignore
+/nodejs/ export-ignore
+/python/ export-ignore
+/docker/ export-ignore
+/.github/ export-ignore
+/demo.html export-ignore
+/publish.sh export-ignore
+/publish.config.json export-ignore
+/test-demo.md export-ignore
+/RELEASE_SUMMARY.md export-ignore
