@@ -10,9 +10,13 @@ export class BirthDateValidator {
     
     const today = new Date();
     const minDate = new Date(today.getFullYear() - 130, today.getMonth(), today.getDate());
-    const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     
-    return date >= minDate && date <= maxDate;
+    // Ensure we're comparing dates at midnight for accurate comparison
+    const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const normalizedToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const normalizedMinDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate());
+    
+    return normalizedDate >= normalizedMinDate && normalizedDate <= normalizedToday;
   }
 
   /**

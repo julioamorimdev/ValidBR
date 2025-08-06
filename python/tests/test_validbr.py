@@ -21,7 +21,7 @@ def test_cnpj():
 
 def test_phone():
     assert validbr.phone.is_valid('(11) 91234-5678')
-    assert not validbr.phone.is_valid('(99) 91234-5678')
+    assert not validbr.phone.is_valid('(00) 91234-5678')  # Invalid DDD
     masked = validbr.phone.apply_mask('11912345678')
     assert masked == '(11) 91234-5678'
     assert validbr.phone.remove_mask(masked) == '11912345678'
@@ -45,7 +45,7 @@ def test_name():
 
 def test_birth_date():
     assert validbr.birth_date.is_valid('1990-05-15')
-    assert not validbr.birth_date.is_valid('2025-05-15')
+    assert not validbr.birth_date.is_valid('2030-05-15')  # Future date
     age = validbr.birth_date.get_age('1990-05-15')
     assert age > 30
     assert validbr.birth_date.is_adult('1990-05-15')

@@ -35,8 +35,10 @@ export class NameValidator {
     return name
       .trim()
       .replace(/\s+/g, ' ') // Replace multiple spaces with single space
-      .replace(/[^\w\sÀ-ÿ]/g, '') // Remove special characters except letters and spaces
-      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   /**

@@ -55,7 +55,7 @@ class EmailValidator
      */
     public function getDomain(?string $email): ?string
     {
-        if (!$this->isValid($email)) {
+        if (empty($email) || !is_string($email)) {
             return null;
         }
 
@@ -69,7 +69,7 @@ class EmailValidator
      */
     public function getUsername(?string $email): ?string
     {
-        if (!$this->isValid($email)) {
+        if (empty($email) || !is_string($email)) {
             return null;
         }
 
@@ -83,7 +83,7 @@ class EmailValidator
      */
     public function isBrazilianProvider(?string $email): bool
     {
-        if (!$this->isValid($email)) {
+        if (empty($email) || !is_string($email)) {
             return false;
         }
 

@@ -30,7 +30,7 @@ class ValidBRTest extends TestCase
     public function testPhone()
     {
         $this->assertTrue(ValidBR::phone()->isValid('(11) 91234-5678'));
-        $this->assertFalse(ValidBR::phone()->isValid('(99) 91234-5678'));
+        $this->assertFalse(ValidBR::phone()->isValid('(00) 91234-5678')); // Invalid DDD
         $masked = ValidBR::phone()->applyMask('11912345678');
         $this->assertEquals('(11) 91234-5678', $masked);
         $this->assertEquals('11912345678', ValidBR::phone()->removeMask($masked));
@@ -60,7 +60,7 @@ class ValidBRTest extends TestCase
     public function testBirthDate()
     {
         $this->assertTrue(ValidBR::birthDate()->isValid('1990-05-15'));
-        $this->assertFalse(ValidBR::birthDate()->isValid('2025-05-15'));
+        $this->assertFalse(ValidBR::birthDate()->isValid('2030-05-15')); // Future date
         $age = ValidBR::birthDate()->getAge('1990-05-15');
         $this->assertGreaterThan(30, $age);
         $this->assertTrue(ValidBR::birthDate()->isAdult('1990-05-15'));
