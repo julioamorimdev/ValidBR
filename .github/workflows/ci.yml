@@ -39,7 +39,7 @@ jobs:
         npm run lint
     
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: nodejs/coverage/lcov.info
         flags: nodejs
@@ -77,7 +77,7 @@ jobs:
         flake8 .
     
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: python/coverage.xml
         flags: python
