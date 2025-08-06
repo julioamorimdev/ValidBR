@@ -105,24 +105,24 @@ describe('ValidBR', () => {
 
   describe('Name Validation', () => {
     test('should validate valid names', () => {
-      expect(ValidBR.name.isValid('João Silva Santos')).toBe(true);
-      expect(ValidBR.name.isValid('Maria da Silva')).toBe(true);
+      expect(ValidBR.fullName.isValid('João Silva Santos')).toBe(true);
+      expect(ValidBR.fullName.isValid('Maria da Silva')).toBe(true);
     });
 
     test('should reject invalid names', () => {
-      expect(ValidBR.name.isValid('João')).toBe(false); // Single name
-      expect(ValidBR.name.isValid('João123')).toBe(false); // Contains numbers
+      expect(ValidBR.fullName.isValid('João')).toBe(false); // Single name
+      expect(ValidBR.fullName.isValid('João123')).toBe(false); // Contains numbers
     });
 
     test('should sanitize name', () => {
-      expect(ValidBR.name.sanitize('  joão   silva  ')).toBe('João Silva');
+      expect(ValidBR.fullName.sanitize('  joão   silva  ')).toBe('João Silva');
     });
 
     test('should extract name parts', () => {
       const name = 'João Silva Santos';
-      expect(ValidBR.name.getFirstName(name)).toBe('João');
-      expect(ValidBR.name.getLastName(name)).toBe('Santos');
-      expect(ValidBR.name.getMiddleNames(name)).toEqual(['Silva']);
+      expect(ValidBR.fullName.getFirstName(name)).toBe('João');
+      expect(ValidBR.fullName.getLastName(name)).toBe('Santos');
+      expect(ValidBR.fullName.getMiddleNames(name)).toEqual(['Silva']);
     });
   });
 

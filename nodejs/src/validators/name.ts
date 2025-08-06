@@ -87,7 +87,10 @@ export class NameValidator {
     const cleanName = this.sanitize(name);
     const nameParts = cleanName.split(' ').filter(part => part.length > 0);
     
-    return nameParts.map(part => part[0].toUpperCase()).join('.') + '.';
+    return nameParts.map(part => {
+      const firstChar = part[0];
+      return firstChar ? firstChar.toUpperCase() : '';
+    }).join('.') + '.';
   }
 
   /**

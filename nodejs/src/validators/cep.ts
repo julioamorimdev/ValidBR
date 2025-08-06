@@ -57,7 +57,7 @@ export class CEPValidator {
     
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
-      const data = await response.json();
+      const data = await response.json() as any;
       
       if (data.erro) return null;
       
@@ -86,7 +86,8 @@ export class CEPValidator {
     if (!this.isValid(cep)) return null;
     
     const cleanCEP = this.removeMask(cep);
-    const firstDigit = parseInt(cleanCEP[0]);
+    const firstChar = cleanCEP[0];
+    const firstDigit = firstChar ? parseInt(firstChar) : 0;
     
     const stateMap: { [key: number]: string } = {
       0: 'SP',
@@ -127,7 +128,8 @@ export class CEPValidator {
     if (!this.isValid(cep)) return null;
     
     const cleanCEP = this.removeMask(cep);
-    const firstDigit = parseInt(cleanCEP[0]);
+    const firstChar = cleanCEP[0];
+    const firstDigit = firstChar ? parseInt(firstChar) : 0;
     
     const regionMap: { [key: number]: string } = {
       0: 'São Paulo',

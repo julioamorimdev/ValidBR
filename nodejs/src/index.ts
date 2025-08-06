@@ -13,7 +13,7 @@ export class ValidBR {
   static readonly cnpj = new CNPJValidator();
   static readonly phone = new PhoneValidator();
   static readonly email = new EmailValidator();
-  static readonly name = new NameValidator();
+  static readonly fullName = new NameValidator();
   static readonly birthDate = new BirthDateValidator();
   static readonly cep = new CEPValidator();
   static readonly rg = new RGValidator();

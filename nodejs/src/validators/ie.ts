@@ -136,7 +136,11 @@ export class IEValidator {
     
     let sum = 0;
     for (let i = 0; i < weights.length - 1; i++) {
-      sum += parseInt(ie[i]) * weights[i];
+      const digit = ie[i];
+      const weight = weights[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     
     const remainder = sum % 11;
@@ -157,7 +161,8 @@ export class IEValidator {
         expectedCheckDigit = remainder === 0 ? 0 : 11 - remainder;
     }
     
-    return parseInt(ie[weights.length - 1]) === expectedCheckDigit;
+    const lastDigit = ie[weights.length - 1];
+    return lastDigit !== undefined && parseInt(lastDigit) === expectedCheckDigit;
   }
 
   /**
@@ -169,7 +174,11 @@ export class IEValidator {
     
     let sum = 0;
     for (let i = 0; i < weights.length - 1; i++) {
-      sum += parseInt(ie[i]) * weights[i];
+      const digit = ie[i];
+      const weight = weights[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     
     const remainder = sum % 11;

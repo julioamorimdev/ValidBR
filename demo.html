@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValidBR - Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; text-align: center; }
+        .header h1 { font-size: 3rem; margin-bottom: 10px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 30px; padding: 20px; border: 1px solid #e1e5e9; border-radius: 10px; background: #fafbfc; }
+        .section h2 { color: #2c3e50; margin-bottom: 20px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 2px solid #e1e5e9; border-radius: 5px; }
+        .btn { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-right: 10px; }
+        .btn:hover { background: #5a6fd8; }
+        .result { margin-top: 10px; padding: 10px; border-radius: 5px; font-weight: 600; }
+        .result.success { background: #d4edda; color: #155724; }
+        .result.error { background: #f8d7da; color: #721c24; }
+        .result.info { background: #d1ecf1; color: #0c5460; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .footer { background: #2c3e50; color: white; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ValidBR</h1>
+            <p>Biblioteca de Validação Brasileira - Demo Interativo</p>
+        </div>
+
+        <div class="content">
+            <!-- CPF -->
+            <div class="section">
+                <h2>🔍 Validação de CPF</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input type="text" id="cpfInput" placeholder="000.000.000-00" maxlength="14">
+                        </div>
+                        <button class="btn" onclick="validateCPF()">Validar CPF</button>
+                        <button class="btn" onclick="generateCPF()">Gerar CPF</button>
+                        <div id="cpfResult"></div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label>CPF para identificar estado:</label>
+                            <input type="text" id="cpfStateInput" placeholder="00000000000" maxlength="11">
+                        </div>
+                        <button class="btn" onclick="getCPFState()">Identificar Estado</button>
+                        <div id="cpfStateResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CNPJ -->
+            <div class="section">
+                <h2>🏢 Validação de CNPJ</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>CNPJ:</label>
+                            <input type="text" id="cnpjInput" placeholder="00.000.000/0000-00" maxlength="18">
+                        </div>
+                        <button class="btn" onclick="validateCNPJ()">Validar CNPJ</button>
+                        <button class="btn" onclick="generateCNPJ()">Gerar CNPJ</button>
+                        <div id="cnpjResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telefone -->
+            <div class="section">
+                <h2>📞 Validação de Telefone</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Telefone:</label>
+                            <input type="text" id="phoneInput" placeholder="(11) 91234-5678" maxlength="15">
+                        </div>
+                        <button class="btn" onclick="validatePhone()">Validar Telefone</button>
+                        <button class="btn" onclick="getDDDInfo()">Info DDD</button>
+                        <div id="phoneResult"></div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label>DDD:</label>
+                            <input type="text" id="dddInput" placeholder="11" maxlength="2">
+                        </div>
+                        <button class="btn" onclick="getDDDState()">Estado do DDD</button>
+                        <div id="dddResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="section">
+                <h2>✉️ Validação de Email</h2>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="emailInput" placeholder="usuario@exemplo.com">
+                </div>
+                <button class="btn" onclick="validateEmail()">Validar Email</button>
+                <button class="btn" onclick="sanitizeEmail()">Sanitizar</button>
+                <div id="emailResult"></div>
+            </div>
+
+            <!-- Nome -->
+            <div class="section">
+                <h2>👤 Validação de Nome</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Nome Completo:</label>
+                            <input type="text" id="nameInput" placeholder="João Silva Santos">
+                        </div>
+                        <button class="btn" onclick="validateName()">Validar Nome</button>
+                        <button class="btn" onclick="getInitials()">Obter Iniciais</button>
+                        <div id="nameResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data de Nascimento -->
+            <div class="section">
+                <h2>📅 Validação de Data de Nascimento</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Data de Nascimento:</label>
+                            <input type="date" id="birthDateInput">
+                        </div>
+                        <button class="btn" onclick="validateBirthDate()">Validar Data</button>
+                        <button class="btn" onclick="calculateAge()">Calcular Idade</button>
+                        <div id="birthDateResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CEP -->
+            <div class="section">
+                <h2>📮 Validação de CEP</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>CEP:</label>
+                            <input type="text" id="cepInput" placeholder="00000-000" maxlength="9">
+                        </div>
+                        <button class="btn" onclick="validateCEP()">Validar CEP</button>
+                        <button class="btn" onclick="getCEPInfo()">Buscar Endereço</button>
+                        <div id="cepResult"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utilitários -->
+            <div class="section">
+                <h2>🛠️ Funções Utilitárias</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Texto para sanitizar:</label>
+                            <input type="text" id="sanitizeInput" placeholder="  texto@exemplo.com  ">
+                        </div>
+                        <button class="btn" onclick="sanitizeText()">Sanitizar</button>
+                        <div id="sanitizeResult"></div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label>Texto para processar:</label>
+                            <input type="text" id="removeInput" placeholder="abc123def456">
+                        </div>
+                        <button class="btn" onclick="removeNonNumeric()">Remover Não-Numéricos</button>
+                        <button class="btn" onclick="removeNonAlphabetic()">Remover Não-Alfabéticos</button>
+                        <div id="removeResult"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>ValidBR - Biblioteca de Validação Brasileira</p>
+            <p>Desenvolvido com ❤️ para a comunidade brasileira</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulação das funções do ValidBR
+        class ValidBR {
+            static cpf = {
+                isValid: (cpf) => {
+                    const clean = cpf.replace(/\D/g, '');
+                    if (clean.length !== 11) return false;
+                    if (/^(\d)\1{10}$/.test(clean)) return false;
+                    
+                    let sum = 0;
+                    for (let i = 0; i < 9; i++) {
+                        sum += parseInt(clean[i]) * (10 - i);
+                    }
+                    let digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    if (digit !== parseInt(clean[9])) return false;
+                    
+                    sum = 0;
+                    for (let i = 0; i < 10; i++) {
+                        sum += parseInt(clean[i]) * (11 - i);
+                    }
+                    digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    if (digit !== parseInt(clean[10])) return false;
+                    
+                    return true;
+                },
+                generate: () => {
+                    const digits = [];
+                    for (let i = 0; i < 9; i++) {
+                        digits.push(Math.floor(Math.random() * 10));
+                    }
+                    
+                    let sum = 0;
+                    for (let i = 0; i < 9; i++) {
+                        sum += digits[i] * (10 - i);
+                    }
+                    let digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    digits.push(digit);
+                    
+                    sum = 0;
+                    for (let i = 0; i < 10; i++) {
+                        sum += digits[i] * (11 - i);
+                    }
+                    digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    digits.push(digit);
+                    
+                    return digits.join('').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                },
+                getState: (cpf) => {
+                    const firstDigit = parseInt(cpf[0]);
+                    const states = {
+                        0: 'Rio Grande do Sul',
+                        1: 'Distrito Federal, Goiás, Mato Grosso, Mato Grosso do Sul, Tocantins',
+                        2: 'Amazonas, Pará, Roraima, Amapá, Acre, Rondônia',
+                        3: 'Ceará, Maranhão, Piauí',
+                        4: 'Paraíba, Pernambuco, Alagoas, Rio Grande do Norte',
+                        5: 'Bahia, Sergipe',
+                        6: 'Minas Gerais',
+                        7: 'Rio de Janeiro, Espírito Santo',
+                        8: 'São Paulo',
+                        9: 'Paraná, Santa Catarina'
+                    };
+                    return states[firstDigit] || 'Estado não identificado';
+                }
+            };
+
+            static cnpj = {
+                isValid: (cnpj) => {
+                    const clean = cnpj.replace(/\D/g, '');
+                    if (clean.length !== 14) return false;
+                    if (/^(\d)\1{13}$/.test(clean)) return false;
+                    
+                    let sum = 0;
+                    const weights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                    for (let i = 0; i < 12; i++) {
+                        sum += parseInt(clean[i]) * weights[i];
+                    }
+                    let digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    if (digit !== parseInt(clean[12])) return false;
+                    
+                    sum = 0;
+                    const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                    for (let i = 0; i < 13; i++) {
+                        sum += parseInt(clean[i]) * weights2[i];
+                    }
+                    digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    if (digit !== parseInt(clean[13])) return false;
+                    
+                    return true;
+                },
+                generate: () => {
+                    const digits = [];
+                    for (let i = 0; i < 12; i++) {
+                        digits.push(Math.floor(Math.random() * 10));
+                    }
+                    
+                    let sum = 0;
+                    const weights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                    for (let i = 0; i < 12; i++) {
+                        sum += digits[i] * weights[i];
+                    }
+                    let digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    digits.push(digit);
+                    
+                    sum = 0;
+                    const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+                    for (let i = 0; i < 13; i++) {
+                        sum += digits[i] * weights2[i];
+                    }
+                    digit = 11 - (sum % 11);
+                    if (digit > 9) digit = 0;
+                    digits.push(digit);
+                    
+                    return digits.join('').replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+                }
+            };
+
+            static phone = {
+                isValid: (phone) => {
+                    const clean = phone.replace(/\D/g, '');
+                    return clean.length >= 10 && clean.length <= 11;
+                },
+                getState: (ddd) => {
+                    const dddStates = {
+                        '11': 'São Paulo', '12': 'São Paulo', '13': 'São Paulo', '14': 'São Paulo',
+                        '15': 'São Paulo', '16': 'São Paulo', '17': 'São Paulo', '18': 'São Paulo',
+                        '19': 'São Paulo', '21': 'Rio de Janeiro', '22': 'Rio de Janeiro',
+                        '24': 'Rio de Janeiro', '27': 'Espírito Santo', '28': 'Espírito Santo',
+                        '31': 'Minas Gerais', '32': 'Minas Gerais', '33': 'Minas Gerais',
+                        '34': 'Minas Gerais', '35': 'Minas Gerais', '37': 'Minas Gerais',
+                        '38': 'Minas Gerais', '41': 'Paraná', '42': 'Paraná', '43': 'Paraná',
+                        '44': 'Paraná', '45': 'Paraná', '46': 'Paraná', '47': 'Santa Catarina',
+                        '48': 'Santa Catarina', '49': 'Santa Catarina', '51': 'Rio Grande do Sul',
+                        '53': 'Rio Grande do Sul', '54': 'Rio Grande do Sul', '55': 'Rio Grande do Sul'
+                    };
+                    return dddStates[ddd] || 'Estado não encontrado';
+                }
+            };
+
+            static email = {
+                isValid: (email) => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                },
+                sanitize: (email) => {
+                    return email.trim().toLowerCase();
+                }
+            };
+
+            static name = {
+                isValid: (name) => {
+                    return name.trim().length >= 2 && /^[a-zA-ZÀ-ÿ\s]+$/.test(name);
+                },
+                getInitials: (name) => {
+                    return name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+                }
+            };
+
+            static birthDate = {
+                isValid: (date) => {
+                    const birthDate = new Date(date);
+                    const today = new Date();
+                    const age = today.getFullYear() - birthDate.getFullYear();
+                    return age >= 0 && age <= 130;
+                },
+                getAge: (date) => {
+                    const birthDate = new Date(date);
+                    const today = new Date();
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    const monthDiff = today.getMonth() - birthDate.getMonth();
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+                    return age;
+                }
+            };
+
+            static cep = {
+                isValid: (cep) => {
+                    const clean = cep.replace(/\D/g, '');
+                    return clean.length === 8;
+                }
+            };
+
+            static sanitize = (text) => {
+                return text.trim();
+            };
+
+            static removeNonNumeric = (text) => {
+                return text.replace(/\D/g, '');
+            };
+
+            static removeNonAlphabetic = (text) => {
+                return text.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+            };
+        }
+
+        // Funções de interface
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="result ${type}">${message}</div>`;
+        }
+
+        function validateCPF() {
+            const cpf = document.getElementById('cpfInput').value;
+            const isValid = ValidBR.cpf.isValid(cpf);
+            const message = isValid ? `✅ CPF válido: ${cpf}` : '❌ CPF inválido';
+            showResult('cpfResult', message, isValid ? 'success' : 'error');
+        }
+
+        function generateCPF() {
+            const cpf = ValidBR.cpf.generate();
+            document.getElementById('cpfInput').value = cpf;
+            showResult('cpfResult', `✅ CPF gerado: ${cpf}`, 'success');
+        }
+
+        function getCPFState() {
+            const cpf = document.getElementById('cpfStateInput').value.replace(/\D/g, '');
+            if (cpf.length === 11) {
+                const state = ValidBR.cpf.getState(cpf);
+                showResult('cpfStateResult', `📍 Estado: ${state}`, 'info');
+            } else {
+                showResult('cpfStateResult', '❌ CPF deve ter 11 dígitos', 'error');
+            }
+        }
+
+        function validateCNPJ() {
+            const cnpj = document.getElementById('cnpjInput').value;
+            const isValid = ValidBR.cnpj.isValid(cnpj);
+            const message = isValid ? `✅ CNPJ válido: ${cnpj}` : '❌ CNPJ inválido';
+            showResult('cnpjResult', message, isValid ? 'success' : 'error');
+        }
+
+        function generateCNPJ() {
+            const cnpj = ValidBR.cnpj.generate();
+            document.getElementById('cnpjInput').value = cnpj;
+            showResult('cnpjResult', `✅ CNPJ gerado: ${cnpj}`, 'success');
+        }
+
+        function validatePhone() {
+            const phone = document.getElementById('phoneInput').value;
+            const isValid = ValidBR.phone.isValid(phone);
+            const message = isValid ? `✅ Telefone válido: ${phone}` : '❌ Telefone inválido';
+            showResult('phoneResult', message, isValid ? 'success' : 'error');
+        }
+
+        function getDDDInfo() {
+            const phone = document.getElementById('phoneInput').value;
+            const ddd = phone.replace(/\D/g, '').substring(0, 2);
+            const state = ValidBR.phone.getState(ddd);
+            showResult('phoneResult', `📍 DDD ${ddd}: ${state}`, 'info');
+        }
+
+        function getDDDState() {
+            const ddd = document.getElementById('dddInput').value;
+            const state = ValidBR.phone.getState(ddd);
+            showResult('dddResult', `📍 Estado do DDD ${ddd}: ${state}`, 'info');
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('emailInput').value;
+            const isValid = ValidBR.email.isValid(email);
+            const message = isValid ? `✅ Email válido: ${email}` : '❌ Email inválido';
+            showResult('emailResult', message, isValid ? 'success' : 'error');
+        }
+
+        function sanitizeEmail() {
+            const email = document.getElementById('emailInput').value;
+            const sanitized = ValidBR.email.sanitize(email);
+            document.getElementById('emailInput').value = sanitized;
+            showResult('emailResult', `🧹 Email sanitizado: ${sanitized}`, 'info');
+        }
+
+        function validateName() {
+            const name = document.getElementById('nameInput').value;
+            const isValid = ValidBR.name.isValid(name);
+            const message = isValid ? `✅ Nome válido: ${name}` : '❌ Nome inválido';
+            showResult('nameResult', message, isValid ? 'success' : 'error');
+        }
+
+        function getInitials() {
+            const name = document.getElementById('nameInput').value;
+            const initials = ValidBR.name.getInitials(name);
+            showResult('nameResult', `🔤 Iniciais: ${initials}`, 'info');
+        }
+
+        function validateBirthDate() {
+            const date = document.getElementById('birthDateInput').value;
+            const isValid = ValidBR.birthDate.isValid(date);
+            const message = isValid ? `✅ Data válida: ${date}` : '❌ Data inválida';
+            showResult('birthDateResult', message, isValid ? 'success' : 'error');
+        }
+
+        function calculateAge() {
+            const date = document.getElementById('birthDateInput').value;
+            const age = ValidBR.birthDate.getAge(date);
+            showResult('birthDateResult', `🎂 Idade: ${age} anos`, 'info');
+        }
+
+        function validateCEP() {
+            const cep = document.getElementById('cepInput').value;
+            const isValid = ValidBR.cep.isValid(cep);
+            const message = isValid ? `✅ CEP válido: ${cep}` : '❌ CEP inválido';
+            showResult('cepResult', message, isValid ? 'success' : 'error');
+        }
+
+        function getCEPInfo() {
+            const cep = document.getElementById('cepInput').value;
+            showResult('cepResult', '🔍 Buscando informações do CEP... (simulação)', 'info');
+        }
+
+        function sanitizeText() {
+            const text = document.getElementById('sanitizeInput').value;
+            const sanitized = ValidBR.sanitize(text);
+            showResult('sanitizeResult', `🧹 Texto sanitizado: "${sanitized}"`, 'info');
+        }
+
+        function removeNonNumeric() {
+            const text = document.getElementById('removeInput').value;
+            const result = ValidBR.removeNonNumeric(text);
+            showResult('removeResult', `🔢 Apenas números: "${result}"`, 'info');
+        }
+
+        function removeNonAlphabetic() {
+            const text = document.getElementById('removeInput').value;
+            const result = ValidBR.removeNonAlphabetic(text);
+            showResult('removeResult', `🔤 Apenas letras: "${result}"`, 'info');
+        }
+
+        // Máscaras automáticas
+        document.getElementById('cpfInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                e.target.value = value;
+            }
+        });
+
+        document.getElementById('cnpjInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 14) {
+                value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+                e.target.value = value;
+            }
+        });
+
+        document.getElementById('phoneInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                if (value.length === 11) {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                } else if (value.length === 10) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            }
+        });
+
+        document.getElementById('cepInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 8) {
+                value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html> 

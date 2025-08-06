@@ -98,16 +98,30 @@ export class BirthDateValidator {
     let date: Date | null = null;
     
     // Try ISO format first
-    if (formats[0].test(dateString)) {
+    const format0 = formats[0];
+    const format1 = formats[1];
+    const format2 = formats[2];
+    
+    if (format0 && format0.test(dateString)) {
       date = new Date(dateString);
-    } else if (formats[1].test(dateString)) {
+    } else if (format1 && format1.test(dateString)) {
       // Assume DD/MM/YYYY for Brazilian format
       const parts = dateString.split('/');
-      date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-    } else if (formats[2].test(dateString)) {
+      const year = parts[2];
+      const month = parts[1];
+      const day = parts[0];
+      if (year && month && day) {
+        date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      }
+    } else if (format2 && format2.test(dateString)) {
       // Assume DD-MM-YYYY for Brazilian format
       const parts = dateString.split('-');
-      date = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+      const year = parts[2];
+      const month = parts[1];
+      const day = parts[0];
+      if (year && month && day) {
+        date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      }
     }
     
     // Check if date is valid

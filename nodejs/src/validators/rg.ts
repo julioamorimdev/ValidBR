@@ -103,13 +103,18 @@ export class RGValidator {
     
     let sum = 0;
     for (let i = 0; i < 8; i++) {
-      sum += parseInt(rg[i]) * weights[i];
+      const digit = rg[i];
+      const weight = weights[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     
     const remainder = sum % 11;
     const expectedCheckDigit = remainder === 0 ? 0 : 11 - remainder;
     
-    return parseInt(rg[8]) === expectedCheckDigit;
+    const eighthDigit = rg[8];
+    return eighthDigit !== undefined && parseInt(eighthDigit) === expectedCheckDigit;
   }
 
   /**
@@ -121,7 +126,11 @@ export class RGValidator {
     
     let sum = 0;
     for (let i = 0; i < 8; i++) {
-      sum += parseInt(rg[i]) * weights[i];
+      const digit = rg[i];
+      const weight = weights[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     
     const remainder = sum % 11;
@@ -144,7 +153,7 @@ export class RGValidator {
   /**
    * Check if RG is from São Paulo
    */
-  isFromSaoPaulo(rg: string): boolean {
+  isFromSaoPaulo(_rg: string): boolean {
     // This would require specific São Paulo RG validation rules
     // For now, return false as this needs state-specific implementation
     return false;

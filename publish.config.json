@@ -1,0 +1,68 @@
+{
+  "project": {
+    "name": "ValidBR",
+    "version": "1.0.0",
+    "description": "Biblioteca de Validação Brasileira"
+  },
+  "repositories": {
+    "npm": {
+      "name": "validbr",
+      "registry": "https://registry.npmjs.org/",
+      "requiresAuth": true,
+      "commands": {
+        "test": "npm test",
+        "build": "npm run build",
+        "publish": "npm publish"
+      }
+    },
+    "pypi": {
+      "name": "validbr",
+      "registry": "https://pypi.org/",
+      "testRegistry": "https://test.pypi.org/",
+      "requiresAuth": true,
+      "commands": {
+        "test": "python -m pytest",
+        "build": "python setup.py sdist bdist_wheel",
+        "publish": "twine upload dist/*",
+        "testPublish": "twine upload --repository testpypi dist/*"
+      }
+    },
+    "packagist": {
+      "name": "validbr/validbr",
+      "registry": "https://packagist.org/",
+      "requiresAuth": false,
+      "requiresManualSetup": true,
+      "commands": {
+        "test": "composer test",
+        "validate": "composer validate"
+      }
+    }
+  },
+  "files": {
+    "include": [
+      "README.md",
+      "LICENSE",
+      "CHANGELOG.md",
+      "CONTRIBUTING.md"
+    ],
+    "exclude": [
+      "node_modules/",
+      "__pycache__/",
+      "*.pyc",
+      ".git/",
+      ".github/",
+      "tests/",
+      "*.test.*",
+      "*.spec.*"
+    ]
+  },
+  "prePublish": {
+    "runTests": true,
+    "checkVersion": true,
+    "validateFiles": true
+  },
+  "postPublish": {
+    "updateBadges": true,
+    "notifyTeam": false
+  }
+} 

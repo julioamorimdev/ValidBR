@@ -16,22 +16,30 @@ export class CPFValidator {
     // Validate first check digit
     let sum = 0;
     for (let i = 0; i < 9; i++) {
-      sum += parseInt(cleanCPF[i]) * (10 - i);
+      const digit = cleanCPF[i];
+      if (digit !== undefined) {
+        sum += parseInt(digit) * (10 - i);
+      }
     }
     let remainder = sum % 11;
     let firstDigit = remainder < 2 ? 0 : 11 - remainder;
     
-    if (parseInt(cleanCPF[9]) !== firstDigit) return false;
+    const ninthDigit = cleanCPF[9];
+    if (ninthDigit === undefined || parseInt(ninthDigit) !== firstDigit) return false;
     
     // Validate second check digit
     sum = 0;
     for (let i = 0; i < 10; i++) {
-      sum += parseInt(cleanCPF[i]) * (11 - i);
+      const digit = cleanCPF[i];
+      if (digit !== undefined) {
+        sum += parseInt(digit) * (11 - i);
+      }
     }
     remainder = sum % 11;
     let secondDigit = remainder < 2 ? 0 : 11 - remainder;
     
-    return parseInt(cleanCPF[10]) === secondDigit;
+    const tenthDigit = cleanCPF[10];
+    return tenthDigit !== undefined && parseInt(tenthDigit) === secondDigit;
   }
 
   /**
@@ -43,7 +51,10 @@ export class CPFValidator {
     // Calculate first check digit
     let sum = 0;
     for (let i = 0; i < 9; i++) {
-      sum += digits[i] * (10 - i);
+      const digit = digits[i];
+      if (digit !== undefined) {
+        sum += digit * (10 - i);
+      }
     }
     let remainder = sum % 11;
     let firstDigit = remainder < 2 ? 0 : 11 - remainder;
@@ -52,7 +63,10 @@ export class CPFValidator {
     // Calculate second check digit
     sum = 0;
     for (let i = 0; i < 10; i++) {
-      sum += digits[i] * (11 - i);
+      const digit = digits[i];
+      if (digit !== undefined) {
+        sum += digit * (11 - i);
+      }
     }
     remainder = sum % 11;
     let secondDigit = remainder < 2 ? 0 : 11 - remainder;

@@ -17,23 +17,33 @@ export class CNPJValidator {
     const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     let sum = 0;
     for (let i = 0; i < 12; i++) {
-      sum += parseInt(cleanCNPJ[i]) * weights1[i];
+      const digit = cleanCNPJ[i];
+      const weight = weights1[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     let remainder = sum % 11;
     let firstDigit = remainder < 2 ? 0 : 11 - remainder;
     
-    if (parseInt(cleanCNPJ[12]) !== firstDigit) return false;
+    const twelfthDigit = cleanCNPJ[12];
+    if (twelfthDigit === undefined || parseInt(twelfthDigit) !== firstDigit) return false;
     
     // Validate second check digit
     const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     sum = 0;
     for (let i = 0; i < 13; i++) {
-      sum += parseInt(cleanCNPJ[i]) * weights2[i];
+      const digit = cleanCNPJ[i];
+      const weight = weights2[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += parseInt(digit) * weight;
+      }
     }
     remainder = sum % 11;
     let secondDigit = remainder < 2 ? 0 : 11 - remainder;
     
-    return parseInt(cleanCNPJ[13]) === secondDigit;
+    const thirteenthDigit = cleanCNPJ[13];
+    return thirteenthDigit !== undefined && parseInt(thirteenthDigit) === secondDigit;
   }
 
   /**
@@ -46,7 +56,11 @@ export class CNPJValidator {
     const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     let sum = 0;
     for (let i = 0; i < 12; i++) {
-      sum += digits[i] * weights1[i];
+      const digit = digits[i];
+      const weight = weights1[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += digit * weight;
+      }
     }
     let remainder = sum % 11;
     let firstDigit = remainder < 2 ? 0 : 11 - remainder;
@@ -56,7 +70,11 @@ export class CNPJValidator {
     const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     sum = 0;
     for (let i = 0; i < 13; i++) {
-      sum += digits[i] * weights2[i];
+      const digit = digits[i];
+      const weight = weights2[i];
+      if (digit !== undefined && weight !== undefined) {
+        sum += digit * weight;
+      }
     }
     remainder = sum % 11;
     let secondDigit = remainder < 2 ? 0 : 11 - remainder;

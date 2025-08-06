@@ -13,6 +13,8 @@ A comprehensive Brazilian validation library for Node.js, Python, and PHP.
 
 Test all ValidBR features directly in your browser: **[Open Demo](demo.html)**
 
+> **💡 Dica**: Abra o arquivo `demo.html` em seu navegador para testar todas as funcionalidades do ValidBR de forma interativa!
+
 ## ✨ Features
 
 ✅ **CPF/CNPJ Validation** - Complete validation with check digits and state identification
@@ -313,6 +315,47 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📈 Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for version history and changes.
+
+## 🚀 Publicação
+
+Para informações sobre como publicar o ValidBR nos repositórios de pacotes, consulte o [Guia de Publicação](PUBLISH_GUIDE.md).
+
+### Status de Publicação
+- [x] **NPM**: Pronto para publicação
+- [x] **PyPI**: Pronto para publicação  
+- [x] **Packagist**: Pronto para publicação
+
+### Comandos de Publicação
+
+#### Usando o Script de Automação (Recomendado)
+```bash
+# Executar todos os testes
+./publish.sh test
+
+# Publicar no NPM
+./publish.sh npm
+
+# Publicar no PyPI
+./publish.sh pypi
+
+# Verificar configuração do Packagist
+./publish.sh packagist
+
+# Processo completo (testes + publicação)
+./publish.sh all
+```
+
+#### Comandos Manuais
+```bash
+# NPM
+cd nodejs && npm publish
+
+# PyPI
+cd python && python setup.py sdist bdist_wheel && twine upload dist/*
+
+# Packagist
+# Conectar repositório Git ao Packagist.org
+```
 
 ## 🌟 Star History
 
