@@ -144,20 +144,20 @@ console.log(ValidBR.phone.applyMask('11912345678')); // '(11) 91234-5678'
 
 ### Python
 ```python
-from validbr import ValidBR
+from validbr import validbr
 
 # CPF validation
-print(ValidBR.cpf.is_valid('123.456.789-09'))  # True
-print(ValidBR.cpf.generate())  # Generate valid CPF
-print(ValidBR.cpf.get_state('12345678909'))  # 'São Paulo'
+print(validbr.cpf.is_valid('123.456.789-09'))  # True
+print(validbr.cpf.generate())  # Generate valid CPF
+print(validbr.cpf.get_state('12345678909'))  # 'São Paulo'
 
 # Phone validation
-print(ValidBR.phone.is_valid('(11) 91234-5678'))  # True
-print(ValidBR.phone.get_state('11')); // 'São Paulo'
+print(validbr.phone.is_valid('(11) 91234-5678'))  # True
+print(validbr.phone.get_state('11'))  # 'São Paulo'
 
 # Apply mask
-print(ValidBR.cpf.apply_mask('12345678909')); // '123.456.789-09'
-print(ValidBR.phone.apply_mask('11912345678')); // '(11) 91234-5678'
+print(validbr.cpf.apply_mask('12345678909'))  # '123.456.789-09'
+print(validbr.phone.apply_mask('11912345678'))  # '(11) 91234-5678'
 ```
 
 ### PHP
@@ -226,12 +226,12 @@ ValidBR.email.isBrazilianProvider('user@uol.com.br'); // true
 ### Name Validation
 ```javascript
 // Node.js
-ValidBR.name.isValid('João Silva Santos');    // true/false
-ValidBR.name.sanitize('João Silva Santos  '); // 'João Silva Santos'
-ValidBR.name.getFirstName('João Silva Santos'); // 'João'
-ValidBR.name.getLastName('João Silva Santos');  // 'Santos'
-ValidBR.name.getInitials('João Silva Santos');  // 'JSS'
-ValidBR.name.hasCommonBrazilianName('João');   // true
+ValidBR.fullName.isValid('João Silva Santos');    // true/false
+ValidBR.fullName.sanitize('João Silva Santos  '); // 'João Silva Santos'
+ValidBR.fullName.getFirstName('João Silva Santos'); // 'João'
+ValidBR.fullName.getLastName('João Silva Santos');  // 'Santos'
+ValidBR.fullName.getInitials('João Silva Santos');  // 'JSS'
+ValidBR.fullName.hasCommonBrazilianName('João');   // true
 ```
 
 ### Birth Date Validation

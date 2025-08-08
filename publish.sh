@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 echo "🚀 ValidBR - Script de Publicação"
 echo "=================================="
@@ -9,11 +10,15 @@ if [ ! -f "publish.config.json" ]; then
     exit 1
 fi
 
-echo "📋 Verificando status dos testes..."
+echo "📋 Instalando dependências e verificando status dos testes..."
 
 # Node.js
 echo "🔵 Testando Node.js..."
 cd nodejs
+if [ ! -d node_modules ]; then
+  echo "📦 Instalando dependências Node..."
+  npm ci || npm install
+fi
 npm test
 if [ $? -ne 0 ]; then
     echo "❌ Testes Node.js falharam"
@@ -25,6 +30,10 @@ cd ..
 # Python
 echo "🐍 Testando Python..."
 cd python
+if ! python3 -c "import pkgutil, sys; import setuptools" >/dev/null 2>&1; then
+  echo "⚠️ Python e setuptools precisam estar instalados."
+fi
+python3 -m pip install -e .[dev] --quiet || true
 python3 -m pytest tests/test_validbr.py -v
 if [ $? -ne 0 ]; then
     echo "❌ Testes Python falharam"
@@ -35,6 +44,10 @@ cd ..
 # PHP
 echo "🐘 Testando PHP..."
 cd php
+if [ ! -d vendor ]; then
+  echo "📦 Instalando dependências PHP..."
+  composer install --no-interaction --no-progress --prefer-dist
+fi
 ./vendor/bin/phpunit tests/ValidBRTest.php
 if [ $? -ne 0 ]; then
     echo "❌ Testes PHP falharam"
