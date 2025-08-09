@@ -7,6 +7,8 @@ from .validators.birth_date import BirthDateValidator
 from .validators.cep import CEPValidator
 from .validators.rg import RGValidator
 from .validators.ie import IEValidator
+from .validators.cnh import CNHValidator
+from .validators.titulo_eleitor import TituloEleitorValidator
 
 
 class ValidBR:
@@ -22,6 +24,8 @@ class ValidBR:
         self.cep = CEPValidator()
         self.rg = RGValidator()
         self.ie = IEValidator()
+        self.cnh = CNHValidator()
+        self.titulo_eleitor = TituloEleitorValidator()
 
     @staticmethod
     def sanitize(input_str: str) -> str:

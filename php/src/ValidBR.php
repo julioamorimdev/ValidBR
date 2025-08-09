@@ -11,6 +11,8 @@ use ValidBR\Validators\BirthDateValidator;
 use ValidBR\Validators\CEPValidator;
 use ValidBR\Validators\RGValidator;
 use ValidBR\Validators\IEValidator;
+use ValidBR\Validators\CNHValidator;
+use ValidBR\Validators\TituloEleitorValidator;
 
 class ValidBR
 {
@@ -23,6 +25,8 @@ class ValidBR
     private static $cep;
     private static $rg;
     private static $ie;
+    private static $cnh;
+    private static $tituloEleitor;
 
     public static function cpf(): CPFValidator
     {
@@ -94,6 +98,22 @@ class ValidBR
             self::$ie = new IEValidator();
         }
         return self::$ie;
+    }
+
+    public static function cnh(): CNHValidator
+    {
+        if (self::$cnh === null) {
+            self::$cnh = new CNHValidator();
+        }
+        return self::$cnh;
+    }
+
+    public static function tituloEleitor(): TituloEleitorValidator
+    {
+        if (self::$tituloEleitor === null) {
+            self::$tituloEleitor = new TituloEleitorValidator();
+        }
+        return self::$tituloEleitor;
     }
 
     /**

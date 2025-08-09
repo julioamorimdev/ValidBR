@@ -7,6 +7,9 @@ import { BirthDateValidator } from './validators/birthDate';
 import { CEPValidator } from './validators/cep';
 import { RGValidator } from './validators/rg';
 import { IEValidator } from './validators/ie';
+import { CNHValidator } from './validators/cnh';
+import { TituloEleitorValidator } from './validators/tituloEleitor';
+import { PISValidator } from './validators/pis';
 
 export class ValidBR {
   static readonly cpf = new CPFValidator();
@@ -18,6 +21,9 @@ export class ValidBR {
   static readonly cep = new CEPValidator();
   static readonly rg = new RGValidator();
   static readonly ie = new IEValidator();
+  static readonly cnh = new CNHValidator();
+  static readonly tituloEleitor = new TituloEleitorValidator();
+  static readonly pis = new PISValidator();
 
   /**
    * Sanitize input by removing extra spaces and invalid characters

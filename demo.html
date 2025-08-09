@@ -181,6 +181,52 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CNH -->
+            <div class="section">
+                <h2>🚗 Validação de CNH</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>CNH:</label>
+                            <input type="text" id="cnhInput" placeholder="00000000000" maxlength="11">
+                        </div>
+                        <button class="btn" onclick="validateCNH()">Validar CNH</button>
+                        <button class="btn" onclick="generateCNH()">Gerar CNH</button>
+                        <div id="cnhResult"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Título de Eleitor -->
+            <div class="section">
+                <h2>🗳️ Validação de Título de Eleitor</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>Título de Eleitor:</label>
+                            <input type="text" id="tituloInput" placeholder="0000 0000 0000" maxlength="14">
+                        </div>
+                        <button class="btn" onclick="validateTitulo()">Validar Título</button>
+                        <button class="btn" onclick="generateTitulo()">Gerar Título</button>
+                        <div id="tituloResult"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- PIS -->
+            <div class="section">
+                <h2>💼 Validação de PIS</h2>
+                <div class="grid">
+                    <div>
+                        <div class="form-group">
+                            <label>PIS:</label>
+                            <input type="text" id="pisInput" placeholder="000.00000.00-0" maxlength="14">
+                        </div>
+                        <button class="btn" onclick="validatePIS()">Validar PIS</button>
+                        <button class="btn" onclick="generatePIS()">Gerar PIS</button>
+                        <div id="pisResult"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -522,6 +568,43 @@
             const text = document.getElementById('removeInput').value;
             const result = ValidBR.removeNonAlphabetic(text);
             showResult('removeResult', `🔤 Apenas letras: "${result}"`, 'info');
+        }
+
+        // CNH
+        function validateCNH() {
+            const cnh = document.getElementById('cnhInput').value;
+            const isValid = ValidBR.cnh.isValid(cnh);
+            const message = isValid ? `✅ CNH válida: ${cnh}` : '❌ CNH inválida';
+            showResult('cnhResult', message, isValid ? 'success' : 'error');
+        }
+        function generateCNH() {
+            const cnh = ValidBR.cnh.generate();
+            document.getElementById('cnhInput').value = cnh;
+            showResult('cnhResult', `✅ CNH gerada: ${cnh}`, 'success');
+        }
+        // Título de Eleitor
+        function validateTitulo() {
+            const titulo = document.getElementById('tituloInput').value;
+            const isValid = ValidBR.tituloEleitor.isValid(titulo);
+            const message = isValid ? `✅ Título válido: ${titulo}` : '❌ Título inválido';
+            showResult('tituloResult', message, isValid ? 'success' : 'error');
+        }
+        function generateTitulo() {
+            const titulo = ValidBR.tituloEleitor.generate();
+            document.getElementById('tituloInput').value = titulo;
+            showResult('tituloResult', `✅ Título gerado: ${titulo}`, 'success');
+        }
+        // PIS
+        function validatePIS() {
+            const pis = document.getElementById('pisInput').value;
+            const isValid = ValidBR.pis.isValid(pis);
+            const message = isValid ? `✅ PIS válido: ${pis}` : '❌ PIS inválido';
+            showResult('pisResult', message, isValid ? 'success' : 'error');
+        }
+        function generatePIS() {
+            const pis = ValidBR.pis.generate();
+            document.getElementById('pisInput').value = pis;
+            showResult('pisResult', `✅ PIS gerado: ${pis}`, 'success');
         }
 
         // Máscaras automáticas
