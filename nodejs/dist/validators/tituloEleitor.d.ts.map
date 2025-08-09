@@ -1,0 +1,1 @@
+{"version":3,"file":"tituloEleitor.d.ts","sourceRoot":"","sources":["../../src/validators/tituloEleitor.ts"],"names":[],"mappings":"AAAA,qBAAa,sBAAsB;IACjC;;OAEG;IACH,OAAO,CAAC,MAAM,EAAE,MAAM,GAAG,OAAO;IAmBhC;;OAEG;IACH,SAAS,CAAC,MAAM,EAAE,MAAM,GAAG,MAAM;IAKjC;;OAEG;IACH,UAAU,CAAC,MAAM,EAAE,MAAM,GAAG,MAAM;IAKlC;;OAEG;IACH,QAAQ,IAAI,MAAM;CAenB"}

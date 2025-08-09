@@ -1,0 +1,1 @@
+{"version":3,"file":"cnh.d.ts","sourceRoot":"","sources":["../../src/validators/cnh.ts"],"names":[],"mappings":"AAAA,qBAAa,YAAY;IACvB;;;OAGG;IACH,OAAO,CAAC,GAAG,EAAE,MAAM,GAAG,OAAO;IAyB7B;;OAEG;IACH,SAAS,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM;IAI9B;;OAEG;IACH,UAAU,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM;IAK/B;;OAEG;IACH,QAAQ,IAAI,MAAM;CAwBnB"}

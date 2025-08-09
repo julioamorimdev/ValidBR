@@ -1,0 +1,1 @@
+{"version":3,"file":"pis.d.ts","sourceRoot":"","sources":["../../src/validators/pis.ts"],"names":[],"mappings":"AAAA,qBAAa,YAAY;IACvB;;;OAGG;IACH,OAAO,CAAC,GAAG,EAAE,MAAM,GAAG,OAAO;IAe7B;;OAEG;IACH,SAAS,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM;IAK9B;;OAEG;IACH,UAAU,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM;IAK/B;;OAEG;IACH,QAAQ,IAAI,MAAM;CAcnB"}

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: validbr
-Version: 1.0.0
+Version: 2.0.0
 Summary: A comprehensive Brazilian validation library for Python
 Home-page: https://github.com/validbr/validbr
 Author: ValidBR Team
@@ -94,7 +94,7 @@ Test all ValidBR features directly in your browser: **[🚀 Open Interactive Dem
 
 ### 🎯 What ValidBR Validates
 
-- **📄 Documents**: CPF, CNPJ, RG, IE (State Registration)
+- **📄 Documents**: CPF, CNPJ, RG, IE (State Registration), CNH, Voter ID (Título de Eleitor), PIS/NIS/NIT/PASEP
 - **📞 Communication**: Phone numbers, Email addresses
 - **📍 Location**: CEP (ZIP codes), DDD codes, State identification
 - **👤 Personal**: Full names, Birth dates
@@ -108,6 +108,9 @@ Test all ValidBR features directly in your browser: **[🚀 Open Interactive Dem
 - ✅ **CPF/CNPJ Validation** - Complete validation with check digits and state identification
 - ✅ **RG Validation** - Including check digits for supported states
 - ✅ **State Registration (IE) Validation** - By UF with state-specific algorithms
+- ✅ **CNH Validation** - Brazilian Driver's License (CNH) validation
+- ✅ **Voter ID (Título de Eleitor) Validation**
+- ✅ **PIS/NIS/NIT/PASEP Validation**
 
 ### 📞 Communication Validation
 - ✅ **Phone Number Validation** - DDD identification, phone format validation, and state lookup
@@ -162,6 +165,18 @@ console.log(ValidBR.cpf.isValid('123.456.789-09')); // true
 console.log(ValidBR.cpf.generate()); // Generate valid CPF
 console.log(ValidBR.cpf.getState('12345678909')); // 'São Paulo'
 
+// CNH validation
+console.log(ValidBR.cnh.isValid('02650306461')); // true
+console.log(ValidBR.cnh.generate()); // Generate valid CNH
+
+// Voter ID validation
+console.log(ValidBR.tituloEleitor.isValid('123456789012')); // true
+console.log(ValidBR.tituloEleitor.generate()); // Generate valid Voter ID
+
+// PIS validation
+console.log(ValidBR.pis.isValid('123.45678.90-1')); // true
+console.log(ValidBR.pis.generate()); // Generate valid PIS
+
 // Phone validation
 console.log(ValidBR.phone.isValid('(11) 91234-5678')); // true
 console.log(ValidBR.phone.getState('11')); // 'São Paulo'
@@ -178,15 +193,27 @@ from validbr import validbr
 # CPF validation
 print(validbr.cpf.is_valid('123.456.789-09'))  # True
 print(validbr.cpf.generate())  # Generate valid CPF
-print(validbr.cpf.get_state('12345678909'))  # 'São Paulo'
+print(validbr.cpf.get_state('12345678909')); // 'São Paulo'
+
+# CNH validation
+print(validbr.cnh.is_valid('02650306461')) # True
+print(validbr.cnh.generate()) # Generate valid CNH
+
+# Voter ID validation
+print(validbr.titulo_eleitor.is_valid('123456789012')) # True
+print(validbr.titulo_eleitor.generate()) # Generate valid Voter ID
+
+# PIS validation
+print(validbr.pis.is_valid('123.45678.90-1')) # True
+print(validbr.pis.generate()) # Generate valid PIS
 
 # Phone validation
-print(validbr.phone.is_valid('(11) 91234-5678'))  # True
-print(validbr.phone.get_state('11'))  # 'São Paulo'
+print(validbr.phone.is_valid('(11) 91234-5678'));  # True
+print(validbr.phone.get_state('11'));  # 'São Paulo'
 
 # Apply mask
-print(validbr.cpf.apply_mask('12345678909'))  # '123.456.789-09'
-print(validbr.phone.apply_mask('11912345678'))  # '(11) 91234-5678'
+print(validbr.cpf.apply_mask('12345678909'));  # '123.456.789-09'
+print(validbr.phone.apply_mask('11912345678'));  # '(11) 91234-5678'
 ```
 
 ### PHP
@@ -197,6 +224,18 @@ use ValidBR\ValidBR;
 echo ValidBR::cpf()->isValid('123.456.789-09') ? 'true' : 'false'; // true
 echo ValidBR::cpf()->generate(); // Generate valid CPF
 echo ValidBR::cpf()->getState('12345678909'); // 'São Paulo'
+
+// CNH validation
+echo ValidBR::cnh()->isValid('02650306461') ? 'true' : 'false'; // true
+echo ValidBR::cnh()->generate(); // Generate valid CNH
+
+// Voter ID validation
+echo ValidBR::tituloEleitor()->isValid('123456789012') ? 'true' : 'false'; // true
+echo ValidBR::tituloEleitor()->generate(); // Generate valid Voter ID
+
+// PIS validation
+echo ValidBR::pis()->isValid('123.45678.90-1') ? 'true' : 'false'; // true
+echo ValidBR::pis()->generate(); // Generate valid PIS
 
 // Phone validation
 echo ValidBR::phone()->isValid('(11) 91234-5678') ? 'true' : 'false'; // true
@@ -301,10 +340,37 @@ ValidBR.rg.getValidStates();                  // Array of supported states
 ```javascript
 // Node.js
 ValidBR.ie.isValid('123.456.789', 'SP');      // true/false
-ValidBR.ie.applyMask('123456789', 'SP');      // '123.456.789'
+ValidBR.ie.applyMask('123.456.789', 'SP');      // '123.456.789'
 ValidBR.ie.removeMask('123.456.789');         // '123456789'
 ValidBR.ie.generate('SP');                    // Generate valid IE for SP
 ValidBR.ie.getValidStates();                  // Array of supported states
+```
+
+### CNH Validation
+```javascript
+// Node.js
+ValidBR.cnh.isValid('02650306461'); // true/false
+ValidBR.cnh.generate(); // Generate valid CNH
+ValidBR.cnh.applyMask('02650306461'); // '02650306461'
+ValidBR.cnh.removeMask('02650306461'); // '02650306461'
+```
+
+### Voter ID (Título de Eleitor) Validation
+```javascript
+// Node.js
+ValidBR.tituloEleitor.isValid('123456789012'); // true/false
+ValidBR.tituloEleitor.generate(); // Generate valid Voter ID
+ValidBR.tituloEleitor.applyMask('123456789012'); // '1234 5678 9012'
+ValidBR.tituloEleitor.removeMask('1234 5678 9012'); // '123456789012'
+```
+
+### PIS/NIS/NIT/PASEP Validation
+```javascript
+// Node.js
+ValidBR.pis.isValid('123.45678.90-1'); // true/false
+ValidBR.pis.generate(); // Generate valid PIS
+ValidBR.pis.applyMask('12345678901'); // '123.45678.90-1'
+ValidBR.pis.removeMask('123.45678.90-1'); // '12345678901'
 ```
 
 ### Utility Functions
@@ -498,7 +564,7 @@ cd python && python setup.py sdist bdist_wheel && twine upload dist/*
 
 ### 🎯 O que o ValidBR Valida
 
-- **📄 Documentos**: CPF, CNPJ, RG, IE (Inscrição Estadual)
+- **📄 Documentos**: CPF, CNPJ, RG, IE (Inscrição Estadual), CNH, Título de Eleitor, PIS/NIS/NIT/PASEP
 - **📞 Comunicação**: Números de telefone, Endereços de email
 - **📍 Localização**: CEP, Códigos DDD, Identificação de estado
 - **👤 Pessoal**: Nomes completos, Datas de nascimento
@@ -512,6 +578,9 @@ cd python && python setup.py sdist bdist_wheel && twine upload dist/*
 - ✅ **Validação CPF/CNPJ** - Validação completa com dígitos verificadores e identificação de estado
 - ✅ **Validação RG** - Incluindo dígitos verificadores para estados suportados
 - ✅ **Validação IE (Inscrição Estadual)** - Por UF com algoritmos específicos de cada estado
+- ✅ **Validação CNH** - Carteira Nacional de Habilitação
+- ✅ **Validação Título de Eleitor**
+- ✅ **Validação PIS/NIS/NIT/PASEP**
 
 ### 📞 Validação de Comunicação
 - ✅ **Validação de Telefone** - Identificação de DDD, validação de formato e busca de estado

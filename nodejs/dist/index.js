@@ -10,6 +10,9 @@ const birthDate_1 = require("./validators/birthDate");
 const cep_1 = require("./validators/cep");
 const rg_1 = require("./validators/rg");
 const ie_1 = require("./validators/ie");
+const cnh_1 = require("./validators/cnh");
+const tituloEleitor_1 = require("./validators/tituloEleitor");
+const pis_1 = require("./validators/pis");
 class ValidBR {
     /**
      * Sanitize input by removing extra spaces and invalid characters
@@ -46,5 +49,8 @@ ValidBR.birthDate = new birthDate_1.BirthDateValidator();
 ValidBR.cep = new cep_1.CEPValidator();
 ValidBR.rg = new rg_1.RGValidator();
 ValidBR.ie = new ie_1.IEValidator();
+ValidBR.cnh = new cnh_1.CNHValidator();
+ValidBR.tituloEleitor = new tituloEleitor_1.TituloEleitorValidator();
+ValidBR.pis = new pis_1.PISValidator();
 exports.default = ValidBR;
 //# sourceMappingURL=index.js.map

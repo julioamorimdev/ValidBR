@@ -7,6 +7,9 @@ import { BirthDateValidator } from './validators/birthDate';
 import { CEPValidator } from './validators/cep';
 import { RGValidator } from './validators/rg';
 import { IEValidator } from './validators/ie';
+import { CNHValidator } from './validators/cnh';
+import { TituloEleitorValidator } from './validators/tituloEleitor';
+import { PISValidator } from './validators/pis';
 export declare class ValidBR {
     static readonly cpf: CPFValidator;
     static readonly cnpj: CNPJValidator;
@@ -17,6 +20,9 @@ export declare class ValidBR {
     static readonly cep: CEPValidator;
     static readonly rg: RGValidator;
     static readonly ie: IEValidator;
+    static readonly cnh: CNHValidator;
+    static readonly tituloEleitor: TituloEleitorValidator;
+    static readonly pis: PISValidator;
     /**
      * Sanitize input by removing extra spaces and invalid characters
      */
