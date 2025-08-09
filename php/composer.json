@@ -49,6 +49,5 @@
         "sanitize"
     ],
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "version": "2.0.0"
+    "prefer-stable": true
 } 

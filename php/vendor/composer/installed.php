@@ -3,7 +3,7 @@
         'name' => 'validbr/validbr',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8aff44b6ad60a299549f21e4f13b76aecca59a14',
+        'reference' => '77a1a1e614bc6def43a3548a72b6d4be0421d186',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -283,7 +283,7 @@
         'validbr/validbr' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8aff44b6ad60a299549f21e4f13b76aecca59a14',
+            'reference' => '77a1a1e614bc6def43a3548a72b6d4be0421d186',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
